@@ -10,15 +10,10 @@ const listingSchema = new Schema({
         type: String,
     },
     image: {
-        type: String,
-        default: "https://unsplash.com/photos/two-chairs-sitting-in-front-of-a-swimming-pool-k_My4rXk4Lc",
-        set: (v) => v === ""
-        ? "https://unsplash.com/photos/two-chairs-sitting-in-front-of-a-swimming-pool-k_My4rXk4Lc"
-        : v,
+        filename: String,
+        url: String
     },
-    price: {
-        type: Number,
-    },
+    price:Number,
     location: {
         type: String,
     },
