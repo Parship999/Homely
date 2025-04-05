@@ -21,7 +21,7 @@ async function main() {
 }
 
 app.set('view engine', 'ejs'); // Set EJS as the templating engine
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'views')); // Set the views directory to the 'views' folder in the current directory
 app.use(express.urlencoded({ extended: true })); // Middleware to parse URL-encoded data
 app.use(methodOverride('_method')); //The methodOverride middleware allows you to use HTTP verbs like PUT, DELETE, and PATCH in HTML forms, which normally only support GET and POST.
 
@@ -44,7 +44,7 @@ app.get("/listings/new", (req, res) => {
 app.get("/listings/:id", async(req, res) => {
     let { id } = req.params;
     const listing = await Listing.findById(id);
-    res.render("listings/show.ejs", {listing});
+    res.render("listings/show.ejs", {listing}); 
 });
 
 //create route for listings
