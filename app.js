@@ -5,6 +5,7 @@ const Listing = require('./models/listing.js');
 const path = require('path');
 const methodOverride = require('method-override');
 const { name } = require('ejs');
+const ejsMate = require('ejs-mate'); // EJS Mate is a template engine that extends EJS with additional features
 
 const MONGO_URL = 'mongodb://127.0.0.1:27017/mydbpro1';
 main()
@@ -24,6 +25,8 @@ app.set('view engine', 'ejs'); // Set EJS as the templating engine
 app.set('views', path.join(__dirname, 'views')); // Set the views directory to the 'views' folder in the current directory
 app.use(express.urlencoded({ extended: true })); // Middleware to parse URL-encoded data
 app.use(methodOverride('_method')); //The methodOverride middleware allows you to use HTTP verbs like PUT, DELETE, and PATCH in HTML forms, which normally only support GET and POST.
+app.engine('ejs', ejsMate); // Use ejs locals for all ejs templates
+app.use(express.static(path.join(__dirname, 'public'))); // Serve static files from the 'public' directory
 
 app.get('/', (req, res) => {
     res.send('Hello World!');
