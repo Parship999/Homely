@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homely</title>
+</head>
+<body>
+    <h3>Edit this listing</h3>
+    <form method="POST" action="/listings/<%= listing._id %>?_method=PUT">
+        <input name="listing[title]" value="<%= listing.title %>" type="text">
+        <br><br>
+        <textarea name="listing[description]"><%= listing.description %></textarea>
+        <br><br>
+        <input name="listing[image]" value="<%= listing.image %>" type="text">
+        <br><br>
+        <input name="listing[price]" value="<%= listing.price %>" type="number">
+        <br><br>
+        <input name="listing[country]" value="<%= listing.country %>" type="text">
+        <br><br>
+        <input name="listing[location]" value="<%= listing.location %>" type="text">
+        <br><br>
+        <button>Edit</button>
+    </form>
+</body>
+</html>
+
+<!-- 
+Why is this needed?
+
+Browsers only support GET and POST in <form>
+If you try <form method="PUT">, the browser will default to GET (ignoring PUT).
+This is a limitation of HTML, not Express.
+RESTful APIs use PUT, DELETE, etc.
+REST conventions recommend:
+POST → Create
+GET → Read
+PUT → Update
+DELETE → Delete
+
+But since HTML forms can’t send PUT/DELETE directly, we need a workaround.
+methodOverride fixes this by "faking" the method
+It checks for a hidden field (_method=PUT) or query parameter (?_method=DELETE).
+Then, it converts a POST request into PUT/DELETE before Express processes it. 
+-->
