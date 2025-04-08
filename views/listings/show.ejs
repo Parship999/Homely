@@ -1,20 +1,144 @@
 <% layout("/layouts/boilerplate") %>
-<body>
-    <h3>Listing Details: </h3>
-    <ul>
-        <li><%= listing.title %></li>
-        <li><%= listing.description %></li>
-        <li> &#8377;<%= listing.price.toLocaleString("en-IN") %></li>  <% //Rupee symbol and comma separated by toLocaleString %>
-        <li><%= listing.location %></li>
-        <li><%= listing.country %></li>
-    </ul>
-    <button>
-    <a href="/listings/<%=listing._id %>/edit">Edit this Listing</a>
-    </button>
+<div class="row" style="height: calc(100vh - 150px); overflow: hidden;">
+    <div class="col-10 col-md-8 offset-1 offset-md-2" style="padding-top: 20px; height: 100%; overflow-y: auto; scrollbar-width: none; -ms-overflow-style: none;">
+        <div class="listing-card">
+            <% if (listing.image && listing.image.url) { %>
+                <img src="<%= listing.image.url %>" alt="<%= listing.title %>" class="listing-image">
+            <% } else { %>
+                <div class="no-image-placeholder">No Image Available</div>
+            <% } %>
 
-    <br><br>
+            <div class="listing-content">
+                <h3 class="listing-title">Listing Details</h3>
 
-    <form action="/listings/<%=listing._id %>?_method=DELETE" method="POST">
-        <button>Delete this listing</button>
-    </form>
-</body>
+                <p><strong>Title:</strong> <%= listing.title %></p>
+                <p><strong>Description:</strong> <%= listing.description %></p>
+                <p><strong>Price:</strong> ₹<%= listing.price.toLocaleString("en-IN") %></p>
+                <p><strong>Location:</strong> <%= listing.location %></p>
+                <p><strong>Country:</strong> <%= listing.country %></p>
+
+
+                <div class="d-flex justify-content-between align-items-center gap-2 mt-4">
+                    <a href="/listings/<%= listing._id %>/edit" class="btn-cool">
+                        <span class="btn-cool-text">Edit</span>
+                        <span class="btn-cool-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M200-200h57l391-391-57-57-391 391v57Zm-80 80v-170l528-527q12-11 26.5-17t30.5-6q16 0 31 6t26 18l55 56q12 11 17.5 26t5.5 30q0 16-5.5 30.5T817-647L290-120H120Zm640-584-56-56 56 56Zm-141 85-28-29 57 57-29-28Z"/></svg>
+                        </span>
+                    </a>
+
+                    <form action="/listings/<%= listing._id %>?_method=DELETE" method="POST">
+                        <button class="btn-cool" type="submit">
+                            <span class="btn-cool-text">Delete</span>
+                            <span class="btn-cool-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="20px" fill="#e3e3e3"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
+                            </span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .no-image-placeholder {
+    height: 220px;
+    background: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    }
+
+    .listing-card {
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+        transition: box-shadow 0.3s ease;
+    }
+
+    .listing-card:hover {
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+    }
+
+    .listing-image {
+        width: 100%;
+        height: 280px;
+        object-fit: cover;
+        border-bottom: 1px solid #eee;
+    }
+
+    .listing-content {
+        padding: 24px;
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+
+    .listing-title {
+        font-size: 1.8rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        background: linear-gradient(90deg, #454545, #1a202c);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+
+    .btn-cool {
+        position: relative;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 50px;
+        background: linear-gradient(135deg, #fb1662, #d81159);
+        color: white;
+        font-weight: 600;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        cursor: pointer;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(251, 22, 98, 0.2);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        text-decoration: none;
+    }
+
+    .btn-cool:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(251, 22, 98, 0.3);
+        background: linear-gradient(135deg, #d81159, #fb1662);
+    }
+
+    .btn-cool:active {
+        transform: translateY(0);
+        box-shadow: 0 2px 8px rgba(251, 22, 98, 0.3);
+    }
+
+    .btn-cool::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: 0.5s;
+    }
+
+    .btn-cool:hover::before {
+        left: 100%;
+    }
+
+    .btn-cool-icon {
+        font-size: 0.5rem;
+        transition: transform 0.3s ease;
+    }
+
+    .btn-cool:hover .btn-cool-icon {
+        transform: rotate(360deg);
+    }
+</style>
