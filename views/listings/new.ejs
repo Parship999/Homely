@@ -13,17 +13,17 @@
             letter-spacing: -0.5px;
         ">Create a new listing</h3>
         
-        <form method="POST" action="/listings" style="height: calc(100% - 50px);">
+        <form method="POST" action="/listings" style="height: calc(100% - 50px);" class="needs-validation" novalidate>
             <div style="height: 100%; display: flex; flex-direction: column;">
                 <div>
                     <div class="mb-2">
                         <label for="title" class="form-label fw-semibold">Title</label>
-                        <input name="listing[title]" placeholder="Your Spotlight Awaits" type="text" class="form-control form-control-sm">
+                        <input name="listing[title]" placeholder="Your Spotlight Awaits" type="text" class="form-control form-control-sm" required>
                     </div>
 
                     <div class="mb-2">
                         <label for="description" class="form-label fw-semibold">Description</label>
-                        <textarea name="listing[description]" class="form-control form-control-sm" rows="2"></textarea>
+                        <textarea name="listing[description]" class="form-control form-control-sm" rows="2" required></textarea>
                     </div>
 
                     <div class="mb-2">
@@ -34,18 +34,18 @@
                     <div class="row g-2">
                         <div class="mb-2 col-md-4">
                             <label for="price" class="form-label fw-semibold">Price</label>
-                            <input name="listing[price]" placeholder="Enter Price" type="number" class="form-control form-control-sm">
+                            <input name="listing[price]" placeholder="Enter Price" type="number" class="form-control form-control-sm" required>
                         </div>
                 
                         <div class="mb-2 col-md-8">
                             <label for="country" class="form-label fw-semibold">Country</label>
-                            <input name="listing[country]" placeholder="Enter Country" type="text" class="form-control form-control-sm">
+                            <input name="listing[country]" placeholder="Enter Country" type="text" class="form-control form-control-sm" required>
                         </div>
                     </div>
 
                     <div class="mb-3">
                         <label for="location" class="form-label fw-semibold">Location</label>
-                        <input name="listing[location]" placeholder="Enter Location" type="text" class="form-control form-control-sm">
+                        <input name="listing[location]" placeholder="Enter Location" type="text" class="form-control form-control-sm" required>
                     </div>
                 </div>
 
