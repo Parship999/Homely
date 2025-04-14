@@ -19,33 +19,41 @@
                     <div class="mb-2">
                         <label for="title" class="form-label fw-semibold">Title</label>
                         <input name="listing[title]" placeholder="Your Spotlight Awaits" type="text" class="form-control form-control-sm" required>
+                        <div class="valid-feedback">Title looks good!</div>
+                        <div class="invalid-feedback">Please enter a title</div>
                     </div>
 
                     <div class="mb-2">
                         <label for="description" class="form-label fw-semibold">Description</label>
                         <textarea name="listing[description]" class="form-control form-control-sm" rows="2" required></textarea>
+                        <div class="valid-feedback">Description looks good!</div>
+                        <div class="invalid-feedback">Please enter a short description</div>
                     </div>
 
                     <div class="mb-2">
                         <label for="image" class="form-label fw-semibold">Image Link</label>
-                        <input name="listing[image]" placeholder="Enter Image URL" type="text" class="form-control form-control-sm">
+                        <input name="listing[image]" placeholder="Enter Image URL" type="text" class="form-control" required>
+                        <div class="invalid-feedback">Please enter a valid image URL</div>
                     </div>
 
                     <div class="row g-2">
                         <div class="mb-2 col-md-4">
                             <label for="price" class="form-label fw-semibold">Price</label>
-                            <input name="listing[price]" placeholder="Enter Price" type="number" class="form-control form-control-sm" required>
+                            <input name="listing[price]" placeholder="Enter Price" class="form-control form-control-sm" required>
+                            <div class="invalid-feedback">Please enter a valid price</div>
                         </div>
                 
                         <div class="mb-2 col-md-8">
                             <label for="country" class="form-label fw-semibold">Country</label>
                             <input name="listing[country]" placeholder="Enter Country" type="text" class="form-control form-control-sm" required>
+                            <div class="invalid-feedback">Please enter a valid country</div>
                         </div>
                     </div>
 
                     <div class="mb-3">
                         <label for="location" class="form-label fw-semibold">Location</label>
-                        <input name="listing[location]" placeholder="Enter Location" type="text" class="form-control form-control-sm" required>
+                        <input name="listing[location]" placeholder="Enter Location" class="form-control form-control-sm" required>
+                        <div class="invalid-feedback">Please enter a valid location</div>
                     </div>
                 </div>
 

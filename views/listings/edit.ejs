@@ -13,39 +13,47 @@
             letter-spacing: -0.5px;
         ">Edit this listing</h3>
         
-        <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" style="height: calc(100% - 50px);">
+        <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" novalidate class="needs-validation" style="height: calc(100% - 50px);">
             <div style="height: 100%; display: flex; flex-direction: column;">
                 <div>
                     <div class="mb-2">
                         <label for="title" class="form-label fw-semibold">Title</label>
-                        <input name="listing[title]" value="<%= listing.title %>" type="text" class="form-control form-control-sm">
+                        <input name="listing[title]" value="<%= listing.title %>" type="text" class="form-control form-control-sm" required>
+                        <div class="valid-feedback">Title looks good!</div>
+                        <div class="invalid-feedback">Please enter a title</div>
                     </div>
 
                     <div class="mb-2">
                         <label for="description" class="form-label fw-semibold">Description</label>
-                        <textarea name="listing[description]" class="form-control form-control-sm" rows="2"><%= listing.description %></textarea>
+                        <textarea name="listing[description]" class="form-control form-control-sm" required rows="2"><%= listing.description %></textarea>
+                        <div class="valid-feedback">Description looks good!</div>
+                        <div class="invalid-feedback">Please enter a short description</div>
                     </div>
 
                     <div class="mb-2">
                         <label for="image" class="form-label fw-semibold">Image Link</label>
-                        <input name="listing[image]" value="<%= listing.image.url %>" type="text" class="form-control form-control-sm">
+                        <input name="listing[image]" value="<%= listing.image.url %>" type="text" class="form-control form-control-sm" required>
+                        <div class="invalid-feedback">Please enter a valid image URL</div>
                     </div>
 
                     <div class="row g-2">
                         <div class="mb-2 col-md-4">
                             <label for="price" class="form-label fw-semibold">Price</label>
-                            <input name="listing[price]" value="<%= listing.price %>" type="number" class="form-control form-control-sm">
+                            <input name="listing[price]" value="<%= listing.price %>" class="form-control form-control-sm" required>
+                            <div class="invalid-feedback">Please enter a valid price</div>
                         </div>
                 
                         <div class="mb-2 col-md-8">
                             <label for="country"  class="form-label fw-semibold">Country</label>
-                            <input name="listing[country]" value="<%= listing.country %>" type="text" class="form-control form-control-sm">
+                            <input name="listing[country]" value="<%= listing.country %>" type="text" class="form-control form-control-sm" required>
+                            <div class="invalid-feedback">Please enter a valid country</div>
                         </div>
                     </div>
 
                     <div class="mb-3">
                         <label for="location" class="form-label fw-semibold">Location</label>
-                        <input name="listing[location]" value="<%= listing.location %>" type="text" class="form-control form-control-sm">
+                        <input name="listing[location]" value="<%= listing.location %>" type="text" class="form-control form-control-sm" required>
+                        <div class="invalid-feedback">Please enter a valid location</div>
                     </div>
                 </div>
 
@@ -59,6 +67,7 @@
         </form>
     </div>
 </div>
+<script src="/js/script.js"></script>
 
 <style>
     .btn-cool {

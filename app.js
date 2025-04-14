@@ -6,6 +6,7 @@ const path = require('path');
 const methodOverride = require('method-override');
 const { name } = require('ejs');
 const ejsMate = require('ejs-mate'); // EJS Mate is a template engine that extends EJS with additional features
+const wrapAsync = require('./utils/wrapAsync.js'); // Wrap async functions to handle errors
 
 const MONGO_URL = 'mongodb://127.0.0.1:27017/mydbpro1';
 main()
@@ -51,11 +52,14 @@ app.get("/listings/:id", async(req, res) => {
 });
 
 //create route for listings
-app.post("/listings", async(req, res) => {
+app.post(
+    "/listings",
+    wrapAsync(async (req, res, next) => {
     const newListing = new Listing(req.body.listing); // Create a new listing using the data from the form
     await newListing.save(); // Save the new listing to the database
     res.redirect("/listings"); // Redirect to the index page after saving
-});
+    })
+);
 
 //edit route for listings
 app.get("/listings/:id/edit", async(req, res) => {
@@ -77,6 +81,10 @@ app.delete("/listings/:id", async(req, res) => {
     let deletedListing = await Listing.findByIdAndDelete(id); // Delete the listing from the database
     res.redirect("/listings"); // Redirect to the index page after deletion
     console.log("Deleted this listing:", deletedListing.title); // Log the ID of the deleted listing
+});
+
+app.use((err, req, res, next) => { // Error handling middleware
+    res.send("Something went wrong!"); // Send the error message as a response
 });
 
 app.listen(8080, () => { // Start the server on port 8080
