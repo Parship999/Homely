@@ -8,6 +8,7 @@ const { name } = require("ejs");
 const ejsMate = require("ejs-mate"); // EJS Mate is a template engine that extends EJS with additional features
 const wrapAsync = require("./utils/wrapAsync.js"); // Wrap async functions to handle errors
 const ExpressError = require("./utils/ExpressError.js"); // Custom error handling class
+const { listingSchema } = require("./schema.js"); // Import the listing schema for validation
 
 const MONGO_URL = "mongodb://127.0.0.1:27017/mydbpro1";
 main()
@@ -33,6 +34,16 @@ app.use(express.static(path.join(__dirname, "public"))); // Serve static files f
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
+
+const validateListing = (req, res, next) => {
+  let {error} = listingSchema.validate(req.body); // Validate the request body against the listing schema
+  if (error) {
+    let errMsg = error.details.map((el) => el.message).join(", "); // Extract error messages from the validation result
+    throw new ExpressError(400, errMsg); // Throw an error if validation fails
+  } else {
+    next(); // Call the next middleware if validation passes
+  }
+}
 
 //Index route for listings
 app.get(
@@ -61,10 +72,8 @@ app.get(
 //create route for listings
 app.post(
   "/listings", //Sets up a route handler for POST requests to the "/listings" endpoint
+  validateListing, // Middleware to validate the listing data before creating a new listing
   wrapAsync(async (req, res, next) => {
-    if (!req.body.listing){
-        throw new ExpressError(400, "Invalid Listing Data"); // Check if the listing data is valid
-    }
     const newListing = new Listing(req.body.listing); // Create a new listing using the data from the form
     await newListing.save(); // Save the new listing to the database
     res.redirect("/listings"); // Redirect to the index page after saving
@@ -84,10 +93,8 @@ app.get(
 //update route for listings
 app.put(
   "/listings/:id",
+  validateListing, // Middleware to validate the listing data before updating
   wrapAsync(async (req, res) => {
-    if (!req.body.listing){
-        throw new ExpressError(400, "Invalid Listing Data"); // Check if the listing data is valid
-    }
     let { id } = req.params; // Get the ID from the request parameters
     await Listing.findByIdAndUpdate(id, { ...req.body.listing }); // Update the listing in the database
     res.redirect(`/listings/${id}`); // Redirect to the show page of the updated listing
