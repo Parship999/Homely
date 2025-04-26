@@ -9,9 +9,8 @@
             <% } %>
 
             <div class="listing-content">
-                <h3 class="listing-title">Listing Details</h3>
+                <h3 class="listing-title"><%= listing.title %></h3>
 
-                <p><strong>Title:</strong> <%= listing.title %></p>
                 <p><strong>Description:</strong> <%= listing.description %></p>
                 <p><strong>Price:</strong> ₹<%= listing.price.toLocaleString("en-IN") %></p>
                 <p><strong>Location:</strong> <%= listing.location %></p>
