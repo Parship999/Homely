@@ -2,6 +2,23 @@
 
 Homely is a web application for property listings, similar to Airbnb. It allows users to browse, create, edit, and delete property listings.
 
+## Screenshots
+
+### All Listings Page
+The main page displaying all available property listings in a responsive grid layout with beautiful property images, titles, and pricing.
+
+![All Listings Page](./screenshots/all-listings.png)
+
+### Create New Listing Form
+A comprehensive form for adding new property listings with fields for title, description, image URL, price, location, and country.
+
+![Create New Listing](./screenshots/create-listing.png)
+
+### Individual Listing Details
+Detailed view of a specific property showing full-size images, complete description, pricing, location details, and action buttons for editing or deleting.
+
+![Listing Details](./screenshots/listing-details.png)
+
 ## Features
 
 - View all property listings
@@ -112,7 +129,7 @@ Homely/
 
 ```javascript
 {
-  title: String,       // Required
+  title: String,  
   description: String,
   image: {
     filename: String,
@@ -121,7 +138,7 @@ Homely/
   price: Number,
   location: String,
   country: String,
-  reviews: [           // References to Review model
+  reviews: [    
     {
       type: ObjectId,
       ref: 'Review'
@@ -145,6 +162,19 @@ The application includes custom error handling middleware that catches and proce
 ## License
 
 This project is licensed under the ISC License - see the LICENSE file for details.
+
+## Screenshots Information
+
+To add your own screenshots to this README:
+
+1. **Save your screenshots** in the `screenshots/` folder with these names:
+   - `all-listings.png` - Screenshot of the main listings page
+   - `create-listing.png` - Screenshot of the create new listing form
+   - `listing-details.png` - Screenshot of an individual listing detail page
+
+2. **Image formats supported**: PNG, JPG, GIF, WebP
+3. **Recommended size**: Keep images under 1MB for faster loading
+4. **Markdown syntax**: `![Alt text](./screenshots/filename.png)`
 
 ## Acknowledgements
 
