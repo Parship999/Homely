@@ -123,58 +123,9 @@ Homely/
 - `PUT /listings/:id` - Update a listing
 - `DELETE /listings/:id` - Delete a listing
 
-## Data Models
-
-### Listing Model
-
-```javascript
-{
-  title: String,
-  description: String,
-  image: {
-    filename: String,
-    url: String
-  },
-  price: Number,
-  location: String,
-  country: String,
-  reviews: [
-    {
-      type: ObjectId,
-      ref: 'Review'
-    }
-  ]
-}
-```
-
-## Error Handling
-
-The application includes custom error handling middleware that catches and processes errors, displaying user-friendly error messages.
-
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
 ## License
 
 This project is licensed under the ISC License - see the LICENSE file for details.
-
-## Screenshots Added ✅
-
-**Status**: Screenshots have been successfully added to the repository!
-
-The following screenshots are now available:
-- ✅ `all-listings.png` - Main listings page
-- ✅ `create-listing.png` - Create new listing form
-- ✅ `listing-details.png` - Individual listing detail page
-
-**To update screenshots in the future:**
-1. Replace the image files in the `screenshots/` folder
-2. Commit and push the changes to Git
 
 ## Acknowledgements
 
