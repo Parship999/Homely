@@ -113,16 +113,6 @@ Homely/
 1. Navigate to a specific listing's page
 2. Click the "Delete" button to remove the listing
 
-## API Routes
-
-- `GET /listings` - View all listings
-- `GET /listings/new` - Form to create a new listing
-- `POST /listings` - Create a new listing
-- `GET /listings/:id` - View a specific listing
-- `GET /listings/:id/edit` - Form to edit a listing
-- `PUT /listings/:id` - Update a listing
-- `DELETE /listings/:id` - Delete a listing
-
 ## License
 
 This project is licensed under the ISC License - see the LICENSE file for details.
